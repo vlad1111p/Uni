@@ -1,1 +1,1 @@
-# All the projects that i did while in university.
+# All the projects that i did during university.
