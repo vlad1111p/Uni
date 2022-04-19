@@ -1,0 +1,380 @@
+package ub2;
+
+import java.awt.List;
+import java.util.AbstractCollection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
+import ub2.Karte.Computerspieler;
+import ub2.Karte.Kartestapel;
+import ub2.Karte.MenschlicherSpieler;
+import ub2.Karte.Spieler;
+
+@SuppressWarnings("unused")
+public class Karte {
+
+	public static final int nkarte = 52;
+	private Farbenwert farbenwert;
+	private Kartenwert kartenwert;
+
+	public Karte(Farbenwert farbenwert, Kartenwert kartenwert) {
+		this.farbenwert = farbenwert;
+		this.kartenwert = kartenwert;
+	}
+
+	// farbenwert von der karte
+	public static enum Farbenwert {
+		Herz, Karo, Kreuz, Pik;
+	}
+
+	// Kartenwert von der karte
+	public static enum Kartenwert {
+		// Bube Dame Konig mussen den Wert 10 haben
+		Ass(11), Zwei(2), Drei(3), Vier(4), Funf(5), Sechs(6), Sieben(7), Acht(8), Neun(9), Zehn(10), Bube(10), Dame(
+				10), König(10);
+
+		private final int wert;
+
+		// Konstruktor
+		Kartenwert(final int wert) {
+			this.wert = wert;
+		}
+
+		public Kartenwert RankWahlen() {
+			Kartenwert[] ranks = values();
+			return ranks[(int) (Math.random() * ranks.length)];
+		}
+
+		// Getter für den Wert der Karte
+		public int getwert() {
+			return wert;
+		}
+
+	}
+
+	// tostring methode
+	public String toString() {
+		// wählt aus, ob der Wert oder der Name der Karte angezeigt wird
+		if (kartenwert.getwert() == 10 || kartenwert.getwert() == 11) {
+			return farbenwert + "-" + kartenwert;
+
+		} else {
+			return farbenwert + "-" + kartenwert.getwert();
+		}
+
+	}
+
+	public int getwert() {
+
+		return kartenwert.getwert();
+	}
+
+	public static void main(String[] args) {
+		Farbenwert herz = Farbenwert.Herz;
+		Kartenwert val = Kartenwert.Acht;
+		Kartenwert val1 = Kartenwert.Ass;
+		Karte card = new Karte(herz, val);
+		Karte card1 = new Karte(herz, val1);
+		Kartestapel stack = new Kartestapel();
+
+		System.out.println("some examples\n" + card);
+		System.out.println(card1);
+
+		System.out.println("all the cards in the stack 2 " + stack.get());
+		Partie game=new Partie();
+		
+		
+
+	}
+
+	// Kartestapel Klasse
+
+	public static class Kartestapel {
+		static Stack<Karte> s1 = new Stack<Karte>();
+
+		public Kartestapel() {
+			for (Farbenwert s : Farbenwert.values()) {
+				for (Kartenwert r : Kartenwert.values()) {
+					Karte k = new Karte(s, r);
+					s1.push(k);
+
+				}
+			}
+			mischen();
+		}
+
+		public static Karte ziehen() {
+			mischen();
+			s1.peek();
+			return s1.pop();
+		}
+
+		public Stack<Karte> get() {
+			return s1;
+		}
+
+		public static void mischen() {
+			Collections.shuffle(s1);
+		}
+	}
+
+	// Spieler Klasse
+
+	public abstract class Spieler {
+		String Name;
+		int money;
+		int bet;
+		int total;
+		protected ArrayList<Karte> cards;
+		private boolean finished = false;
+
+		Spieler() {
+
+		}
+		abstract boolean wantToHit();
+		// Konstruktor
+		abstract int moneyget() ;
+		public ArrayList<Karte> getcards(){
+			return cards;
+		}
+
+		public void placeBet(int newBet) {
+
+			if (newBet > money) {
+				bet = money;
+				money = 0;
+			} else {
+				bet = newBet;
+				money -= bet;
+			}
+		}
+
+		public String getName() {
+			return Name;
+		}
+
+		// Aktualisierung
+		public void finish(boolean won) {
+			if (won) {
+				money += bet * 2;
+			} else {
+				money = money - bet;
+			}
+			bet = 0;
+			finished = true;
+		}
+
+		// Wert von der hand
+		public int getHandValue() {
+			int value = 0;
+			int aces = 0;
+			for (Karte card : cards) {
+				if (card.getwert() == 11) {
+					aces++;
+				}
+				value += card.getwert();
+			}
+			// wert von ass kann 1 oder 11 sein
+			if (value > 21 && aces > 0) {
+				value -= 10;
+			}
+			return value;
+		}
+
+		public int getBet() {
+			return bet;
+		}
+
+		
+		
+	
+		
+
+	}
+	// Klasse Computerspieler
+	public class Computerspieler extends Spieler {
+
+		Computerspieler() {
+			this.Name = "Dealer";
+		}
+
+		public void setkonto(int money) {
+			this.money = money;
+			
+		}
+
+		// Wenn der Wert der Computerhand weniger als 16 ist
+		public boolean wantToHit() {
+			if (getHandValue() < 16)
+				return true;
+			if (getHandValue() > 16)
+				return false;
+			if (ThreadLocalRandom.current().nextInt(0, 2) == 0)
+				return true;
+			return false;
+		}
+		
+		public Karte hit(Karte card) {
+			if (wantToHit()) {
+				cards.add(Kartestapel.ziehen());
+				total = getHandValue();
+				return card;
+			}
+			return null;
+		}
+
+		@Override
+		int moneyget() {
+			// TODO Auto-generated method stub
+			return money;
+		}
+
+		
+
+	}
+
+	// Klasse MenschlicherSpieler
+			public class MenschlicherSpieler extends Spieler {
+				private Scanner sc;
+
+				MenschlicherSpieler() {
+					
+
+					sc = new Scanner(System.in);
+					System.out.print("\n Name : ");
+					this.Name = sc.nextLine();
+					System.out.print("\n how much money : ");
+					this.money = sc.nextInt();
+
+				}
+
+				@Override
+				public int moneyget() {
+					return money;
+				}
+
+				// ob der spieler \"hit\" or \"pass\":
+				public boolean wantToHit() {
+					System.out.print("\nWould you like to \"hit\" or \"pass\": ");
+					while (true) {
+						String input = sc.nextLine();
+						if (input.equals("hit")) {
+							return true;
+						} else if (input.equals("pass")) {
+							return false;
+						} else {
+							System.out.print("Type \"hit\" or \"pass\": ");
+						}
+					}
+				}
+
+				// Hit methode
+				public Karte hit(Karte card) {
+					if (wantToHit()) {
+						cards.add(Kartestapel.ziehen());
+						total = getHandValue();
+						return card;
+					}
+					return null;
+				}
+			}
+
+	public class Partie {
+		
+		private ArrayList<Spieler> players;
+		String Name;
+		private Kartestapel deck;
+		private Scanner keyboard;
+
+		Partie() {
+			deck = new Kartestapel();
+			initgame();
+			dealCards();
+			takeTurns();
+			declareWinner();
+			playAgain();
+		}
+
+		  private void playAgain() {
+		        System.out.print("\nPlay again? \"y\" / \"n\": ");
+		        keyboard = new Scanner(System.in);
+		        while(true) {
+		            String input = keyboard.next();
+		            if (input.equals("y")) {
+		                Partie game = new Partie();
+		            } else if (input.equals("n")) {
+		                System.exit(0);
+		            } else {
+		                System.out.print("Please type \"y\" or \"n\": ");
+		            }
+		        }
+		    }
+
+		private void declareWinner() {
+			 int highest = -1;
+	        int topPlayer = -1;
+	        for (int i = 0; i < players.size(); i++) {
+	            String name = players.get(i).getName();
+	           int total = players.get(i).getHandValue();
+
+	            System.out.println(name +  " has a total of " + total + ".");
+
+	            if (total > highest && total <= 21) {
+	                highest = total;
+	                topPlayer = i;
+	            }
+	            if (total == highest && name.equals("Dealer")) {
+	                topPlayer = i;
+	            }
+	        }
+	        if (topPlayer == -1) {
+	            System.out.println("Everyone is dead. Nobody wins.");
+	        } else {
+	            System.out.println(players.get(topPlayer).getName() + " wins!");
+	        }
+	 
+			
+		}
+
+		private void initgame() {
+			
+			MenschlicherSpieler player1 = new MenschlicherSpieler();
+			Computerspieler player2 = new Computerspieler();
+			player2.setkonto(player1.moneyget());
+			players = new ArrayList<Spieler>();
+			players.add(player1);
+			players.add(player2);
+
+		}
+		private void dealCards() {
+	        for (Spieler player : players) {
+	            player.cards.add(Kartestapel.ziehen());
+	            player.cards.add(Kartestapel.ziehen());
+	        }
+	    }
+		private void takeTurns() {
+	        for (Spieler player: players) {
+	            boolean endOfTurn = false;
+	            while(!endOfTurn) {
+	               System.out.println(player.getcards());
+	                boolean hit = player.wantToHit();
+	                if (hit) {
+	                    player.cards.add(Kartestapel.ziehen());
+	                    System.out.println(player.getName() + " drew a card.\n");
+	                    if (player.getHandValue() > 21) {
+	                        endOfTurn = true;
+	                        System.out.println(player.getName() + " died.\n");
+	                    }
+	                } else {
+	                    endOfTurn = true;
+	                    System.out.println(player.getName() + " stayed.\n");
+	                }
+	            }
+	        }
+	    }
+		
+
+	}
+}

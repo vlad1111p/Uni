@@ -1,0 +1,100 @@
+package ub2;
+
+import java.util.Stack;
+
+import ub2.Karte.Kartestapel;
+
+@SuppressWarnings("unused")
+public class Karte {
+
+	public static final int nkarte = 52;
+	private Farbenwert farbenwert;
+	private Kartenwert kartenwert;
+
+	public Karte(Farbenwert farbenwert, Kartenwert kartenwert) {
+		this.farbenwert = farbenwert;
+		this.kartenwert = kartenwert;
+	}
+
+	// farbenwert von der karte
+	public static enum Farbenwert {
+		Herz, Karo, Kreuz, Pik;
+	}
+
+	// Kartenwert von der karte
+	public static enum Kartenwert {
+		// Bube Dame Konig mussen den Wert 10 haben
+		Ass(11), Zwei(2), Drei(3), Vier(4), Funf(5), Sechs(6), Sieben(7), Acht(8), Neun(9), Zehn(10), Bube(10), Dame(
+				10), König(10);
+
+		private final int wert;
+
+		// Konstruktor
+		Kartenwert(final int wert) {
+			this.wert = wert;
+		}
+
+		public Kartenwert RankWahlen() {
+			Kartenwert[] ranks = values();
+			return ranks[(int) (Math.random() * ranks.length)];
+		}
+
+		// Getter für den Wert der Karte
+		public int getwert() {
+			return wert;
+		}
+
+	}
+
+	// tostring methode
+	public String toString() {
+		// wählt aus, ob der Wert oder der Name der Karte angezeigt wird
+		if (kartenwert.getwert() == 10 || kartenwert.getwert() == 11) {
+			return farbenwert + "-" + kartenwert;
+
+		} else {
+			return farbenwert + "-" + kartenwert.getwert();
+		}
+	}
+
+	public static void main(String[] args) {
+		Farbenwert herz = Farbenwert.Herz;
+		Kartenwert val = Kartenwert.Acht;
+		Kartenwert val1 = Kartenwert.Ass;
+		Karte card = new Karte(herz, val);
+		Karte card1 = new Karte(herz, val1);
+		 
+		System.out.println("some examples\n" + card);
+		System.out.println(card1);
+		 Kartestapel.showcards();
+		
+	}
+
+	// Kartestapel Klasse
+
+	public static class Kartestapel {
+		static Stack<Karte> s1 = new Stack<Karte>();
+
+		public Kartestapel() {
+			for (Farbenwert s : Farbenwert.values()) {
+				for (Kartenwert r : Kartenwert.values()) {
+					Karte k = new Karte(s, r);
+					s1.push(k);
+					
+				}
+			}
+		
+		}
+		public static Stack<Karte> showcards() {
+			for (Farbenwert s : Farbenwert.values()) {
+				for (Kartenwert r : Kartenwert.values()) {
+					Karte k = new Karte(s, r);
+					s1.push((ub2.Karte) k);
+					s1.peek();
+				}
+			}
+			return s1;
+		}
+		
+	}
+}

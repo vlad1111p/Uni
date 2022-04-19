@@ -1,0 +1,24 @@
+public class Caesar {
+
+	public static String caesarenc(char[] input, int K) {
+		String returnchar ="";
+
+		for (int i = 0; i < input.length; i++) {
+			if (Character.isLetter(input[i])) {
+				if (Character.isUpperCase(input[i])) {
+					input[i] = Character.toLowerCase(input[i]);
+				}
+				char character = (char) (((int) input[i] + K - 97) % 26 + 97);
+				returnchar = returnchar + character;
+			}
+		}
+		return returnchar;
+	}
+
+	public static void main(String[] args) {
+		char[] text = new char[] { 'K', 'r', 'y', 'p', 't', 'o', 'g', 'r', 'a', 'p', 'h', 'i', 'e' };
+		int k = 5;
+		System.out.println("encrypted text" + caesarenc(text, k));
+	}
+
+}

@@ -1,0 +1,30 @@
+package ub2a2;
+
+public class Zellraum {
+	private   int zeilen;
+	private   int spalten;
+	private static int[][] array;
+	
+	public Zellraum(int zeilen, int spalten) {
+		this.zeilen = zeilen;
+		this.spalten = spalten;
+		array=new int[zeilen][spalten];
+		
+		
+	}
+	
+	public static int[][] getZellen() {
+		
+		return array;
+	}
+	void setZellen(int[][] neueZellen) {
+		array=neueZellen;
+		
+	}
+	 public static void main(String[] args)  {
+	        Zellraum zr = new Zellraum(5, 6);
+	        zr.setZellen(new int[][]{{0,0,0,0,0,0},{0,0,1,1,0,0},{0,1,0,0,1,0},{0,0,1,1,0,0},{0,0,0,0,0,0}});
+	        for(int i=0;i<3;i++)
+	        		System.out.println(zr[0][i]);
+	 }
+}

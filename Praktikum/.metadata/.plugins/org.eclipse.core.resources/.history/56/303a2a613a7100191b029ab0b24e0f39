@@ -1,0 +1,31 @@
+package ub2a2;
+
+public class Zellraum {
+	private int zeilen;
+	private int spalten;
+	private int[][] array;
+
+	public Zellraum(int zeilen, int spalten) {
+		this.zeilen = zeilen;
+		this.spalten = spalten;
+		this.array = new int[zeilen][spalten];
+
+	}
+	public int getzeilen() {
+		return this.zeilen;
+	}
+	public int getspalten() {
+		return this.spalten;
+	}
+
+	public  int[][] getZellen() {
+
+		return this.array;
+	}
+
+	void setZellen(int[][] neueZellen) {
+		this.array = neueZellen;
+
+	}
+	
+}

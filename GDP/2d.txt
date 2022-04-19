@@ -1,0 +1,5 @@
+/2
+d)
+Man kann die Methode verschiebenUm in die Klasse Figur schreiben.
+Hierfür muss man jedoch auch die Vec2 Objekte "start" und "ende" als protected in Figur schreiben.
+Nun erben Linie, Kreis und Rechteck von Figur und verschiebenUm funktioniert.

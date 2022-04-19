@@ -1,0 +1,37 @@
+package ub2a2;
+
+
+
+public class Nachbarschaft {
+	private boolean set;
+	Nachbarschaft() {
+		
+	}
+
+	 synchronized void setMoore() {
+		settrue() ;
+	}
+
+	synchronized void setVonNeumann() {
+		setf();
+	}
+	private void settrue() {
+		
+		this.set=true;
+	}
+	private void setf() {
+		
+		this.set=false;
+	}
+
+	public boolean getb() {
+	
+		return set;
+	}
+	
+	
+
+
+	
+	}
+

@@ -1,0 +1,22 @@
+Farbenwert herz = Farbenwert.Herz;
+		Kartenwert val = Kartenwert.Acht;
+		Kartenwert val1 = Kartenwert.Ass;
+		
+		Karte card = new Karte(herz, val);
+		Karte card1 = new Karte(herz, val1);
+		Kartestapel stack = new Kartestapel();
+
+		System.out.println("some examples\n" + card);
+		System.out.println(card1.getwert());
+
+		System.out.println("all the cards in the stack 2 " + stack.ziehen());
+		System.out.println("all the cards in the stack 1 " + stack.s1);
+		
+			public String toString() {
+		// wählt aus, ob der Wert oder der Name der Karte angezeigt wird
+		if (kartenwert.getwert() == 10 || kartenwert.getwert() == 11) {
+			return farbenwert + "-" + kartenwert;
+
+		} else {
+			return farbenwert + "-" + kartenwert.getwert();
+		}

@@ -1,0 +1,14 @@
+package ub2;
+
+public class Karte {
+	public static final int nkarte = 52;
+	private String Farbenwert ;
+	
+	
+	
+	public String toString(){
+		String[] Farbenwerte = { "Herz", "Karo", "Kreuz", "Pik" };
+		String[] Kartenwerte = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Ace", "Bube", "Dame", "König" };
+        return "\n"+value + " of "+ suit;
+	}
+}

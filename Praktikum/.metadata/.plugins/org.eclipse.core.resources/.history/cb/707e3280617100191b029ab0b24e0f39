@@ -1,0 +1,70 @@
+package ub2a2;
+
+public class TestMWSS {
+
+	public static void main(String[] args) throws InterruptedException {
+		Zellraum zr = new Zellraum(9, 10);
+		zr.setZellen(new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
+
+		Zellraum zv = new Zellraum(9, 10);
+		zv.setZellen(new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
+		Zellraum zm = new Zellraum(9, 10);
+		zm.setZellen(new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, { 0, 0, 1, 1, 0, 1, 1, 1, 0, 0 },
+				{ 0, 0, 0, 1, 1, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
+		Zellraum zl = new Zellraum(9, 10);
+		zl.setZellen(new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
+		Nachbarschaft nb = new Nachbarschaft();
+		nb.setVonNeumann();
+		Nachbarschaft nm = new Nachbarschaft();
+		nm.setVonNeumann();
+		Nachbarschaft nv = new Nachbarschaft();
+		nv.setMoore();
+		Automat at = new Automat(zr, nb);
+		Automat ab = new Automat(zv, nv);
+		Automat am = new Automat(zm, nm);
+		Automat al = new Automat(zl, nm);
+
+		for (int i = 0; i < 10; i++) {
+
+			at.naechsteGenerationBerechnen();
+			ab.naechsteGenerationBerechnen();
+			am.naechsteGenerationBerechnen();
+			;
+
+			for (int c = 0; c < zr.getZellen().length; c++) {
+				// VonNeumann
+				for (int l = 0; l < zr.getZellen()[c].length; l++) {
+					System.out.print(zr.getZellen()[c][l]);
+				}
+				System.out.print("  ");
+				// moore
+				for (int v = 0; v < zv.getZellen()[c].length; v++) {
+
+					System.out.print(zv.getZellen()[c][v]);
+				}
+				System.out.print("  ");
+				// VonNeumann
+				for (int m = 0; m < zm.getZellen()[c].length; m++) {
+
+					System.out.print(zm.getZellen()[c][m]);
+				}
+				System.out.println();
+
+			}
+			System.out.println();
+			Thread.sleep(1000);
+		}
+
+	}
+}

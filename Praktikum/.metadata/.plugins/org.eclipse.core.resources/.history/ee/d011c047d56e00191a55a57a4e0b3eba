@@ -1,0 +1,26 @@
+package ub2;
+
+public class Karte {
+	public static final int nkarte = 52;
+	private int Farbenwert;
+	private int Kartenwert;
+
+	public Karte(int Farbenwert, int Kartenwert) {
+		this.Farbenwert = Farbenwert;
+		this.Kartenwert = Kartenwert;
+	}
+
+	public String toString() {
+		String[] Farbenwerte = { "Herz", "Karo", "Kreuz", "Pik" };
+		String[] Kartenwerte = { null, "2", "3", "4", "5", "6", "7", "8", "9", "10", "Ace", "Bube", "Dame", "König" };
+		String retval = Farbenwerte[this.Farbenwert] + " - " + Kartenwerte[this.Kartenwert];
+		return retval;
+
+	}
+	public static void main(String[] args){
+		Karte card = new Karte(1,11);
+		System.out.println(card);
+		
+	}
+
+}

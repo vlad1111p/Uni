@@ -1,0 +1,45 @@
+package ub2a2;
+import ub2a2.Zellraum;;
+import ub2a2.Nachbarschaft.Pair;
+
+public class Nachbarschaft {
+
+	Nachbarschaft() {
+
+	}
+
+	public void setMoore() {
+
+	}
+
+	public void setVonNeumann() {
+
+	}
+	 public int nbNeighboursOf(int i, int j) {
+		  int nb = 0;
+		  for (int k = i -1; k <= i +1; k++) {
+		   for (int l = j - 1; l <= j +1; l++) {
+		    if ((k != i || l != j) && k >= 0
+		         && k < width && l >=0 && l < height) {
+		         Zellraum cell = array[k][l];
+		         if (cell.alive) {
+		          nb++;
+		         }
+		    }
+		   }
+		  }
+		  return nb;
+		 }
+	
+
+
+	public class Pair<A, B> {
+		public final A fst;
+		public final B snd;
+
+		public Pair(final A fst, final B snd) {
+			this.fst = fst;
+			this.snd = snd;
+		}
+	}
+}

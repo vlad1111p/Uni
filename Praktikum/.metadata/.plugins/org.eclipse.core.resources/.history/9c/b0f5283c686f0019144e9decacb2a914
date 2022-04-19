@@ -1,0 +1,85 @@
+package ub2;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import ub2.Kartestapel;
+
+public abstract class Spieler {
+	String Name;
+	int money;
+	int bet;
+	int total;
+
+	LinkedList<Karte> cards;
+	private boolean finished = false;
+
+	Spieler() {
+
+	}
+
+	abstract boolean wantToHit();
+
+	// Konstruktor
+	abstract int moneyget();
+
+	public LinkedList<Karte> getcards() {
+		return cards;
+	}
+
+	public void add(Karte e) {
+		cards.add(e);
+	}
+
+	public void placeBet(int newBet) {
+
+		if (newBet > money) {
+			bet = money;
+			money = 0;
+		} else {
+			bet = newBet;
+			money -= bet;
+		}
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	// Aktualisierung
+	public void finish(boolean won) {
+		if (won) {
+			money += bet * 2;
+		} else {
+			money = money - bet;
+		}
+		bet = 0;
+		finished = true;
+	}
+
+	
+	
+
+	// Wert von der hand
+	public int getHandValue() {
+		int value = 0;
+		int aces = 0;
+		for (Karte card : cards) {
+			if (card.getwert() == 11) {
+				aces++;
+			}
+			value += card.getwert();
+		}
+		// wert von ass kann 1 oder 11 sein
+		if (value > 21 && aces > 0) {
+			value -= 10;
+		}
+		return value;
+	}
+
+	public int getBet() {
+		return bet;
+	}
+
+	abstract Karte take();
+
+}

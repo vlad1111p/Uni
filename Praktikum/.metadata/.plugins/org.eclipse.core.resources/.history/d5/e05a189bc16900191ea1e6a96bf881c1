@@ -1,0 +1,31 @@
+package ubungsblat1aufg3;
+
+public class Caesar {
+
+	public static char[] caesarenc(char[] text, int K) {
+		
+
+		for (int i = 0; i < extracted(text).length; i++) {
+			if (Character.isLetter(extracted(text)[i])) {
+				if (Character.isUpperCase(extracted(text)[i])) {
+					extracted(text)[i] = Character.toLowerCase(extracted(text)[i]);
+				}
+				extracted(text)[i] =(char)(((int)extracted(text)[i]+K-65)%26 + 65);
+				
+			}
+		}
+		return extracted(text);
+	}
+
+	public static void main(String[] args) {
+		char[] text = new char[] { 'K', 'r', 'y', 'p', 't', 'o', 'g', 'r', 'a', 'p', 'h', 'i', 'e' };
+		int k = 5;
+		char[] caesarenc = caesarenc(extracted(text), k);
+		System.out.println("Text : " + extracted(caesarenc));
+	}
+
+	private static char[] extracted(char[] caesarenc) {
+		return caesarenc;
+	}
+
+}

@@ -1,0 +1,48 @@
+package ub2;
+
+
+import java.util.Collections;
+import java.util.Stack;
+import ub2.Karte;
+import ub2.Karte.Farbenwert;
+import ub2.Karte.Kartenwert;
+import ub2.Partie;
+
+import ub2.Computerspieler;
+import ub2.MenschlicherSpieler;
+
+@SuppressWarnings("unused")
+public class Kartestapel {
+	static Stack<Karte> s1 = new Stack<Karte>();
+	//erstellt ein Kartenstapel mit alle karten
+	public Kartestapel() {
+		for (Farbenwert s : Farbenwert.values()) {
+			for (Kartenwert r : Kartenwert.values()) {
+				Karte k = new Karte(s, r);
+				s1.push(k);
+
+			}
+		}
+		mischen();
+		LinkedList<Karte>=get();
+
+	}
+
+	public Stack<Karte> get() {
+		return s1;
+	}
+	
+	public static Karte ziehen() {
+		if (s1.empty()!=true) {
+		
+		Karte s1card=s1.pop();
+		return s1card;
+		}
+		return null;
+	}
+	
+
+	public static void mischen() {
+		Collections.shuffle(s1);
+	}
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.junit.Before"/>
+<fullyQualifiedTypeName name="org.junit.After"/>
+<fullyQualifiedTypeName name="ub2.Karte.Spieler.MenschlicherSpieler"/>
+<fullyQualifiedTypeName name="ub2.Karte.Spieler.Computerspieler"/>
+<fullyQualifiedTypeName name="ub2.Karte.Spieler.Partie"/>
+<fullyQualifiedTypeName name="ub2.Karte.Partie"/>
+<fullyQualifiedTypeName name="ub2.Karte"/>
+<fullyQualifiedTypeName name="ub2.Partie"/>
+<fullyQualifiedTypeName name="ub2.Spieler"/>
+<fullyQualifiedTypeName name="ub2.Computerspieler"/>
+<fullyQualifiedTypeName name="ub2.MenschlicherSpieler"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="ub2.Kartestapel"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="ub2a2.Zellraum"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

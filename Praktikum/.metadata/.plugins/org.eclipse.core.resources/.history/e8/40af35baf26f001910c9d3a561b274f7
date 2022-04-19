@@ -1,0 +1,24 @@
+package ub2a2;
+import ub2a2.Zellraum;
+
+
+public class Nachbarschaft {
+	static boolean set;
+	Nachbarschaft() {
+		
+	}
+
+	public  void setMoore() {
+		this.set=true;
+	}
+
+	public  void setVonNeumann() {
+		this.set=false;
+	}
+	
+	
+
+
+	
+	}
+

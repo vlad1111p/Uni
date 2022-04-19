@@ -1,0 +1,54 @@
+package ub2;
+
+import java.util.Scanner;
+
+import ub2.Karte.Kartestapel;
+import ub2.Spieler;
+
+//Klasse MenschlicherSpieler
+			public class MenschlicherSpieler extends Spieler {
+				private Scanner sc;
+
+				MenschlicherSpieler() {
+					
+
+					sc = new Scanner(System.in);
+					System.out.print("\n Name : ");
+					this.Name = sc.nextLine();
+					System.out.print("\n how much money : ");
+					this.money = sc.nextInt();
+
+				}
+
+				@Override
+				public int moneyget() {
+					return money;
+				}
+
+				// ob der spieler \"hit\" or \"pass\":
+				public boolean wantToHit() {
+					System.out.print("\nWould you like to \"hit\" or \"pass\": ");
+					while (true) {
+						String input = sc.nextLine();
+						if (input.equals("hit")) {
+							return true;
+						} else if (input.equals("pass")) {
+							return false;
+						} else {
+							System.out.print("Type \"hit\" or \"pass\": ");
+						}
+					}
+				}
+
+				// Hit methode
+				public Karte hit(Karte card) {
+					if (wantToHit()) {
+						cards.add(Kartestapel.ziehen());
+						total = getHandValue();
+						return card;
+					}
+					return null;
+				}
+			}
+
+	

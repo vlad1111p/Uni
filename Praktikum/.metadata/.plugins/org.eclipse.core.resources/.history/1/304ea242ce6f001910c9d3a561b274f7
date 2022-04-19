@@ -1,0 +1,15 @@
+package ub2a2;
+
+public class Nachbarschaf {
+
+	
+	
+	
+	public class Pair hA, Bi {
+		public final A fst;
+		public final B snd;
+		public Pair (final A fst,
+		final B snd) {
+		this.fst = fst;
+		this.snd = snd; }
+}

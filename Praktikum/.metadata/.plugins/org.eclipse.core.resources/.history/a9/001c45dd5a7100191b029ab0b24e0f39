@@ -1,0 +1,35 @@
+package ub2a2;
+
+public class Zellraum {
+	private int zeilen;
+	private int spalten;
+	private int[][] array;
+
+	public Zellraum(int zeilen, int spalten) {
+		 synchronized(this) {
+		zeilen = zeilen;
+		spalten = spalten;
+		array = new int[zeilen][spalten];
+		 }
+	}
+	public synchronized int getzeilen() {
+		 synchronized(this) {
+		return zeilen;}
+	}
+	public synchronized int getspalten() { synchronized(this) {
+		return spalten;}
+	}
+
+	public synchronized int[][] getZellen() {
+		 synchronized(this) {
+
+		return array;}
+	}
+
+	void setZellen(int[][] neueZellen) {
+		 synchronized(this) {
+		array = neueZellen;
+		 }
+	}
+	
+}

@@ -1,0 +1,18 @@
+INDEX VERSION 1.130+E:\work\praktikum\.metadata\.plugins\org.eclipse.jdt.core
+1840880920.index
+3136308977.index
+665171931.index
+3765176859.index
+1694904456.index
+2495707459.index
+1630314699.index
+4095194627.index
+2094211278.index
+246223334.index
+160190203.index
+3973240433.index
+2406303839.index
+1979937354.index
+533172327.index
+2030886850.index
+3475189183.index

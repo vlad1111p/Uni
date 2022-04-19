@@ -1,0 +1,30 @@
+package ubungsblat1aufg3;
+import java.util.Scanner;
+public class Caesar {
+
+	public static String caesarenc(char[] input, int K) {
+		String returnchar ="";
+
+		for (int i = 0; i < input.length; i++) {
+			if (Character.isLetter(input[i])) {
+				if (Character.isUpperCase(input[i])) {
+					input[i] = Character.toLowerCase(input[i]);
+				}
+				char character = (char) (((int) input[i] + K - 97) % 26 + 97);
+				returnchar = returnchar + character;
+			}
+		}
+		return returnchar;
+	}
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+	    String text1 = input.nextLine();
+	    int k = input.nextInt();
+	    char[] text2 = text1.toCharArray();
+		
+		
+		System.out.println(caesarenc(text2, k));
+	}
+
+}

@@ -1,0 +1,45 @@
+package ub2;
+
+public class Karte {
+	public static final int nkarte = 52;
+
+	private int Farbenwert;
+	private int Kartenwert;
+	
+	
+	public Karte(int Farbenwert, int Kartenwert) {
+		this.Farbenwert = Farbenwert;
+		this.Kartenwert = Kartenwert;
+	}
+	public static enum Farbenwerte {
+		Herz, Karo, Kreuz, Pik;
+	}
+	public static enum Kartenwerte{
+		
+		Ass(11),Zwei(2),Drei(3),Vier(4),Funf(5),Sechs(6),Sieben(7),Acht(8),Neun(9),Zehn(10),Bube(10), Dame(10), König(10) ;
+		
+		final int wert;
+		
+		Kartenwerte(int wert) {
+			
+	        this.wert = wert;
+	
+		}
+		public int getwert() {
+		        return wert;
+		    }
+	}
+
+	public String toString() {
+	
+		String retval = + "-" + Kartenwerte.getwert();
+		return retval;
+
+	}
+	public static void main(String[] args){
+		Karte card = new Karte(2,13);
+		System.out.println(card);
+		
+	}
+
+}

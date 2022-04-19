@@ -1,0 +1,51 @@
+package ub2a2;
+
+import java.util.Arrays;
+
+public class TestMWSS {
+
+    public static void main(String[] args) throws InterruptedException {
+        Zellraum zr = new Zellraum(9, 9);
+        zr.setZellen(new int[][]{{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,1,1,0,0,0,0,0},{0,0,1,1,0,1,1,1,0,0},{0,0,0,1,1,1,1,1,0,0},{0,0,0,1,1,1,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}});
+        
+        Zellraum zv = new Zellraum(9, 9);
+        zv.setZellen(new int[][]{{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,1,1,0,0,0,0,0},{0,0,1,1,0,1,1,1,0,0},{0,0,0,1,1,1,1,1,0,0},{0,0,0,1,1,1,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}});
+
+                    Nachbarschaft nb = new Nachbarschaft();
+                    nb.setVonNeumann();
+          Nachbarschaft nv = new Nachbarschaft();
+          nv.setMoore();
+        Automat at = new Automat(zr, nb);
+        Automat ab = new Automat(zv, nv);
+        ab.naechsteGenerationBerechnen();
+        for(int i = 0; i < 10; i++){
+        
+            at.naechsteGenerationBerechnen();
+            ab.naechsteGenerationBerechnen();
+        
+            int[][] zln = zr.getZellen();
+            Thread.sleep(1000);
+      
+        	int[][] zlv = zv.getZellen();
+       
+           
+            for(int[] zeile : zln){int c=0;
+                for (int spalte : zeile){
+                    System.out.print(spalte);
+                }
+                System.out.print("  ");
+            
+                for (int v=0; v<zv.getZellen()[c].length;v++) {
+                	
+                	System.out.print(zv.getZellen()[c][v]);
+                	 }
+                System.out.println();
+                c++;
+            	
+            }
+            System.out.println();
+            Thread.sleep(1000);
+        }
+   
+    }
+}
